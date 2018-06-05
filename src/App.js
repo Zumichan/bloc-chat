@@ -20,7 +20,8 @@ class App extends Component {
         <header>
          <h1>Bloc Chat</h1>
         </header>
-        /*<RoomList firebase={firebase}/>*/
+        /*passing firebase from `App.js` to the component as a prop??*/
+        <RoomList firebase = { firebase }/>
       </div>
     );
   }
