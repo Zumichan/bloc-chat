@@ -7,12 +7,32 @@ class RoomList extends Component {
       rooms: []
     }
     this.roomsRef = this.props.firebase.database().ref('rooms');
+   }
 
-    
+   componentDidMount() {
+     this.roomsRef.on('child_added', snapshot => {
+       const room = snapshot.val();
+       room.key = snapshot.key;
+       this.setState({ rooms: this.state.rooms.concat( room ) });
+     });
+   }
+
+    render(){
+      return(
+
+        <section className='room-list'>
+        <ul>
+          {
+         this.state.rooms.map( room =>
+           <li key={room.key} >
+              {room.name}
+           </li>
+         )
+       }
+       </ul>
+      </section>
+      );
   }
-
-
-
 }
 
 export default RoomList;
