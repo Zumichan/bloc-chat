@@ -20,7 +20,8 @@ class App extends Component {
         <header>
          <h1>Bloc Chat</h1>
         </header>
-        <RoomList />
+        {/*passing firebase as a prop in order to use it inside of the RoomList*/}
+        <RoomList firebase={firebase} />
       </div>
     );
   }
