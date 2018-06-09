@@ -19,16 +19,13 @@ class RoomList extends Component {
    }
 
    createRoom(e) {
-     {/*Prevent the default page reload on form submit*/}
      e.preventDefault();
-      {/*If newRoomName has no value, return the function early=>User can't create empty newRoomName*/}
      if(!this.state.newRoomName){
        return
      }
      this.roomsRef.push(
        { name: this.state.newRoomName }
      );
-     {/*Clear the value of the text input on cretion of a newRoomName*/}
      this.setState(
        { newRoomName:"" }
      )
@@ -49,6 +46,7 @@ class RoomList extends Component {
         <section className='room-list'>
         <ul>
           {
+            {/*highlight the active room*/}
          this.state.rooms.map( (room,index) =>
            <li key={index} onClick={(e) => this.selectRoom(room)}>
               {room.name}

@@ -41,7 +41,7 @@ class MessageList extends Component {
    }
 
    componentDidMount() {
-     this.massagesRef.on('child_added', snapshot => {
+     this.messagesRef.on('child_added', snapshot => {
        const message = snapshot.val();
        message.key = snapshot.key;
        this.setState({ messages: this.state.messages.concat(message) });
@@ -52,6 +52,7 @@ class MessageList extends Component {
       return(
         <section className='message-list'>
           {
+            {/*filter results by the ID of the active room*/}
             this.state.messages.map((message,index)=>
               <div key={index}>
                 {message.content}
