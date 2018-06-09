@@ -19,14 +19,24 @@ class MessageList extends Component {
        username: this.state.username,
        content: this.state.content,
        sentAt: this.state.sentAt,
-       roomId: this.state.roomId,
+       roomId: this.state.roomId
      });
      {/*Clear the value of the text inputs on cretion of a message*/}
      this.setState({
        username:"",
        content:"",
        sentAt:"",
-       roomId:"",
+       roomId:""
+     });
+   }
+
+   handleChange(e){
+     e.preventDefault();
+     this.setState({
+       username:"user" ,
+       content:e.target.value,
+       sentAt:this.props.firebase.database.ServerValue.TIMESTAMP,
+       roomId:this.props.activeRoom
      });
    }
 
@@ -38,11 +48,16 @@ class MessageList extends Component {
      });
    }
 
-
-
     render(){
       return(
         <section className='message-list'>
+          {
+            this.state.messages.map((message,index)=>
+              <div key={index}>
+                {message.content}
+              </div>
+          )
+          }
 
       </section>
       );

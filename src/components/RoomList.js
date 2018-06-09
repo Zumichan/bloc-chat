@@ -40,13 +40,17 @@ class RoomList extends Component {
      );
    }
 
+   selectRoom(room){
+     this.props.activeRoom(room);
+   }
+
     render(){
       return(
         <section className='room-list'>
         <ul>
           {
-         this.state.rooms.map( room =>
-           <li key={room.key} >
+         this.state.rooms.map( (room,index) =>
+           <li key={index} onClick={(e) => this.selectRoom(room)}>
               {room.name}
            </li>
          )
