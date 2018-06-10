@@ -4,11 +4,8 @@ class MessageList extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      username:"",
-      content:"",
-      sentAt:"",
-      roomId:"",
-      messages:[]
+      messages:[],
+      newMessage:""
     }
    this.messagesRef = this.props.firebase.database().ref('messages');
    }
@@ -16,12 +13,12 @@ class MessageList extends Component {
    createMessage(e) {
      e.preventDefault();
      this.messagesRef.push({
-       username: this.state.username,
-       content: this.state.content,
-       sentAt: this.state.sentAt,
-       roomId: this.state.roomId
+       username:"username",
+       content: this.state.newMessage,
+       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+       roomId: this.props.activeRoom.key
      });
-     {/*Clear the value of the text inputs on cretion of a message*/}
+     //Clear the value of the text inputs on cretion of a message
      this.setState({
        username:"",
        content:"",
@@ -31,13 +28,9 @@ class MessageList extends Component {
    }
 
    handleChange(e){
-     e.preventDefault();
-     this.setState({
-       username:"user" ,
-       content:e.target.value,
-       sentAt:this.props.firebase.database.ServerValue.TIMESTAMP,
-       roomId:this.props.activeRoom
-     });
+     this.setState(
+       { newMessage:""}
+     )
    }
 
    componentDidMount() {
@@ -51,14 +44,24 @@ class MessageList extends Component {
     render(){
       return(
         <section className='message-list'>
-          {
-            {/*filter results by the ID of the active room*/}
-            this.state.messages.map((message,index)=>
+          <h2 className='room-name'>
+            { this.props.activeRoom? this.props.activeRoom.name : "Please select a room" }
+          </h2>
+
+            //filter results by the ID of the active room
+            <ul>
+            {this.state.messages.map((message,index)=>
               <div key={index}>
                 {message.content}
               </div>
-          )
-          }
+          )}
+          </ul>
+          <form onSubmit={ (e) => this.handleChange(e) }>
+          <input value={ this.state.newMessage }
+                 onChange={ (e) => this.handleChange(e) }
+          />
+          <input type="submit" value="Select"/>
+          </form>
 
       </section>
       );
