@@ -5,7 +5,10 @@ class MessageList extends Component {
     super(props);
     this.state = {
       messages:[],
-      newMessage:""
+      username:"",
+      content:"",
+      sentAt:"",
+      roomId:""
     }
    this.messagesRef = this.props.firebase.database().ref('messages');
    }
@@ -13,12 +16,12 @@ class MessageList extends Component {
    createMessage(e) {
      e.preventDefault();
      this.messagesRef.push({
-       username:"username",
-       content: this.state.newMessage,
-       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-       roomId: this.props.activeRoom.key
+       username:this.state.username,
+       content: this.state.content,
+       sentAt: this.state.sentAt,
+       roomId: this.state.roomId
      });
-     //Clear the value of the text inputs on cretion of a message
+     {/*Clear the value of the text inputs on cretion of a message*/}
      this.setState({
        username:"",
        content:"",
@@ -28,9 +31,13 @@ class MessageList extends Component {
    }
 
    handleChange(e){
-     this.setState(
-       { newMessage:""}
-     )
+     e.preventDefault();
+     this.setState({
+       username: "user",
+       content: e.target.value,
+       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+       roomId: this.props.activeRoom
+      })
    }
 
    componentDidMount() {
@@ -44,23 +51,25 @@ class MessageList extends Component {
     render(){
       return(
         <section className='message-list'>
-          <h2 className='room-name'>
-            { this.props.activeRoom? this.props.activeRoom.name : "Please select a room" }
-          </h2>
 
-            //filter results by the ID of the active room
-            <ul>
-            {this.state.messages.map((message,index)=>
-              <div key={index}>
-                {message.content}
-              </div>
-          )}
-          </ul>
-          <form onSubmit={ (e) => this.handleChange(e) }>
-          <input value={ this.state.newMessage }
+
+            {/*filter results by the ID of the active room*/}
+
+            {this.state.messages.map((message)=>{
+              if(message.roomId === this.props.activeRoom){
+                return <li key={message.key}>{message.content}</li>
+              }
+            return null;
+        })
+      }
+
+          <form onSubmit={ (e) => this.createMessage(e) }>
+          <input type="text"
+                 value={ this.state.content }
+                 placeholder="Enter a message"
                  onChange={ (e) => this.handleChange(e) }
           />
-          <input type="submit" value="Select"/>
+          <input type="submit" value="Send"/>
           </form>
 
       </section>

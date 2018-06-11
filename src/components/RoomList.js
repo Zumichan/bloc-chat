@@ -42,7 +42,7 @@ class RoomList extends Component {
         <section className='room-list'>
         <ul>
           {
-         //highlight the active room
+        
          this.state.rooms.map( room =>
            <li key={ room.key } onClick={ (room) => this.props.changeActiveRoom(room) }>
               {room.name}

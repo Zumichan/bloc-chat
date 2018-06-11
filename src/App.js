@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
 
-{/*Firebase Initialization*/}
+{/*Initialize Firebase*/}
 var config = {
   apiKey: "AIzaSyA8iZaf7j67xSX4rApcRe2YBiQadut4XCk",
   authDomain: "bloc-chat-b40f7.firebaseapp.com",
@@ -24,12 +24,10 @@ class App extends Component {
     };
   }
 
-  //added
   changeActiveRoom(room){
     this.setState({ activeRoom: room })
   }
 
-  //added
   showMessage(message){
     this.setState({ activeMessage: message })
   }
@@ -40,20 +38,26 @@ class App extends Component {
         <header>
          <h1>Bloc Chat</h1>
         </header>
-            //added
           <div className="container">
+            <div className="room-list">
+            <h2>{this.state.activeRoom || "Select A Room"}</h2>
             <ul>
               <RoomList
                 firebase={firebase}
                 activeRoom={ this.state.activeRoom }
                 changeActiveRoom={ (room) => this.changeActiveRoom(room) }
               />
+                </ul>
+              </div>
+              <div className="message-list">
+              <ul>
               <MessageList
                 firebase={firebase}
                 activeRoom={ this.state.activeRoom }
                 showMessage={ (message) => this.showMessage(message) }
               />
-            </ul>
+                </ul>
+              </div>
           </div>
       </div>
     );
