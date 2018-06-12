@@ -51,17 +51,15 @@ class MessageList extends Component {
     render(){
       return(
         <section className='message-list'>
-
-
-            {/*filter results by the ID of the active room*/}
-
-            {this.state.messages.map((message)=>{
+          {/*filter results by the ID of the active room*/}
+          {
+            this.state.messages.map((message)=>{
               if(message.roomId === this.props.activeRoom){
                 return <li key={message.key}>{message.content}</li>
               }
-            return null;
-        })
-      }
+              return null;
+            })
+          }
 
           <form onSubmit={ (e) => this.createMessage(e) }>
           <input type="text"
@@ -73,7 +71,7 @@ class MessageList extends Component {
           </form>
 
       </section>
-      );
+    );
   }
 }
 
