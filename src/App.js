@@ -65,7 +65,7 @@ class App extends Component {
               />
               <User
                 firebase={ firebase }
-                user={this.state.user}
+                user={ this.state.user }
                 setUser={ (user) => this.setUser(user) }
               />
               </ul>
