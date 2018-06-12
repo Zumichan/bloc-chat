@@ -51,17 +51,15 @@ class MessageList extends Component {
     render(){
       return(
         <section className='message-list'>
-
-
-            {/*filter results by the ID of the active room*/}
-
-            {this.state.messages.map((message)=>{
-              if(message.roomId === this.props.activeRoom){
-                return <li key={message.key}>{message.content}</li>
-              }
+          {/*filter results by the ID of the active room*/}
+          {
+            this.state.messages.filter(message=>message.roomId == this.props.activeRoom).map((message, index)=>{
+            if(message.roomId === this.props.activeRoom){
+              return <li key={index}>{message.username} {message.content}</li>
+            }
             return null;
-        })
-      }
+            })
+          }
 
           <form onSubmit={ (e) => this.createMessage(e) }>
           <input type="text"
@@ -71,7 +69,6 @@ class MessageList extends Component {
           />
           <input type="submit" value="Send"/>
           </form>
-
       </section>
       );
   }

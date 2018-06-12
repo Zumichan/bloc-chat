@@ -20,12 +20,12 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom: "",
-      activeMessage: ""
     };
   }
 
   changeActiveRoom(room){
     this.setState({ activeRoom: room })
+    console.log(this.state.activeRoom);
   }
 
   showMessage(message){
@@ -36,28 +36,28 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-         <h1>Bloc Chat</h1>
+          <h1>Bloc Chat</h1>
         </header>
           <div className="container">
             <div className="room-list">
-            <h2>{this.state.activeRoom || "Select A Room"}</h2>
-            <ul>
-              <RoomList
-                firebase={firebase}
-                activeRoom={ this.state.activeRoom }
-                changeActiveRoom={ (room) => this.changeActiveRoom(room) }
-              />
-                </ul>
-              </div>
-              <div className="message-list">
+              <h3>{this.state.activeRoom || "Select A Room"}</h3>
               <ul>
-              <MessageList
-                firebase={firebase}
-                activeRoom={ this.state.activeRoom }
-                showMessage={ (message) => this.showMessage(message) }
-              />
-                </ul>
-              </div>
+                <RoomList
+                  firebase={firebase}
+                  activeRoom={ this.state.activeRoom }
+                  changeActiveRoom={ (room) => this.changeActiveRoom(room) }
+                />
+              </ul>
+            </div>
+            <div className="message-list">
+              <ul>
+                <MessageList
+                  firebase={firebase}
+                  activeRoom={ this.state.activeRoom }
+                  showMessage={ (message) => this.showMessage(message) }
+                />
+              </ul>
+            </div>
           </div>
       </div>
     );

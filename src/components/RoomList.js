@@ -5,17 +5,9 @@ class RoomList extends Component {
     super(props);
     this.state = {
       rooms: [],
-      newRoomName:""
+      newRoomName: ""
     }
     this.roomsRef = this.props.firebase.database().ref('rooms');
-   }
-
-   componentDidMount() {
-     this.roomsRef.on('child_added', snapshot => {
-       const room = snapshot.val();
-       room.key = snapshot.key;
-       this.setState({ rooms: this.state.rooms.concat(room) });
-     });
    }
 
    createRoom(e) {
@@ -37,31 +29,39 @@ class RoomList extends Component {
      );
    }
 
+   componentDidMount() {
+     this.roomsRef.on('child_added', snapshot => {
+       const room = snapshot.val();
+       room.key = snapshot.key;
+       this.setState({ rooms: this.state.rooms.concat(room) });
+     });
+   }
+
     render(){
       return(
         <section className='room-list'>
         <ul>
+          {/*Highlight the active room*/}
           {
-        
-         this.state.rooms.map( room =>
-           <li key={ room.key } onClick={ (room) => this.props.changeActiveRoom(room) }>
-              {room.name}
-           </li>
-         )
+            this.state.rooms.map( room =>
+              <li key={ room.key } onClick={ (room) => this.props.changeActiveRoom(room) }>
+                {room.name}
+              </li>
+            )
           }
-       </ul>
+        </ul>
 
-       <form onSubmit={ (e) => this.createRoom(e) }>
-         <input type="text"
-                value={ this.state.newRoomName }
-                placeholder="Please enter a room name."
-                onChange={ (e) => this.handleChange(e) }
-         />
-         <input type="submit" value="Create New Room"/>
-       </form>
-      </section>
+         <form onSubmit={ (e) => this.createRoom(e) }>
+           <input type="text"
+                  value={ this.state.newRoomName }
+                  placeholder="Please enter a room name."
+                  onChange={ (e) => this.handleChange(e) }
+           />
+           <input type="submit" value="Create New Room"/>
+         </form>
+         </section>
       );
+    }
   }
-}
 
 export default RoomList;
