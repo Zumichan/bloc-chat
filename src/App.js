@@ -26,7 +26,7 @@ class App extends Component {
 
   changeActiveRoom(room){
     this.setState({ activeRoom: room })
-    console.log(this.state.activeRoom);
+    //console.log(this.state.activeRoom);
   }
 
   showMessage(message){
@@ -41,7 +41,7 @@ class App extends Component {
         </header>
           <div className="container">
             <div className="room-list">
-              <h3>{this.state.activeRoom || "Select A Room"}</h3>
+              <h3>Select a room</h3>
               <ul>
                 <RoomList
                   firebase={firebase}
