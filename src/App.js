@@ -26,7 +26,7 @@ class App extends Component {
 
   changeActiveRoom(room){
     this.setState({ activeRoom: room })
-    //console.log(this.state.activeRoom);
+    console.log(this.state.activeRoom);
   }
 
   showMessage(message){
