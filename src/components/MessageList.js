@@ -44,9 +44,10 @@ class MessageList extends Component {
        username: !this.props.user ? "Guest" : this.props.user.displayName,
        content: e.target.value,
        sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+       //sentAt is currently shown as the number of milliseconds
        roomId: this.props.activeRoom.key
       })
-      console.log(this.props.user,"user is undefined");
+      //console.log(this.props.user,"user is undefined");
    }
 
     render(){

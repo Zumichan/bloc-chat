@@ -34,6 +34,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("Render has user " + this.state.user)
     return (
       <div className="App">
         <header>
@@ -55,6 +56,8 @@ class App extends Component {
               <MessageList
                 firebase={firebase}
                 activeRoom={ this.state.activeRoom }
+                //In order to use user as props in MessageList.js
+                user={ this.state.user }
               />
               <User
                 firebase={ firebase }
