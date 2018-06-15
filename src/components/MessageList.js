@@ -4,40 +4,9 @@ class MessageList extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      messages:[],
-      username:"",
-      content:"",
-      sentAt:"",
-      roomId:""
+      messages:[]
     }
    this.messagesRef = this.props.firebase.database().ref('messages');
-   }
-
-   createMessage(e) {
-     e.preventDefault();
-     this.messagesRef.push({
-       username:this.state.username,
-       content: this.state.content,
-       sentAt: this.state.sentAt,
-       roomId: this.state.roomId
-     });
-     {/*Clear the value of the text inputs on cretion of a message*/}
-     this.setState({
-       username:"",
-       content:"",
-       sentAt:"",
-       roomId:""
-     });
-   }
-
-   handleChange(e){
-     e.preventDefault();
-     this.setState({
-       username: "user",
-       content: e.target.value,
-       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-       roomId: this.props.activeRoom
-      })
    }
 
    componentDidMount() {
@@ -53,22 +22,17 @@ class MessageList extends Component {
         <section className='message-list'>
           {/*filter results by the ID of the active room*/}
           {
-            this.state.messages.filter(message => message.roomId === this.props.activeRoom).map((message, index)=>{
-            if(message.roomId === this.props.activeRoom){
-              return <li key={index}>{message.username} {message.content}</li>
-            }
-            return null;
+            this.state.messages.map((message, index)=>{
+              if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
+                return <li key={index}>{message.username}:{message.content}</li>
+              } else {
+                return null
+              }
+              {/* Debug code
+              return <li key={index}>{message.roomId} (selected {(this.props.activeRoom ? this.props.activeRoom.key : "nothing")})-- {message.username}:{message.content}</li>
+              */}
             })
           }
-
-          <form onSubmit={ (e) => this.createMessage(e) }>
-          <input type="text"
-                 value={ this.state.content }
-                 placeholder="Enter a message"
-                 onChange={ (e) => this.handleChange(e) }
-          />
-          <input type="submit" value="Send"/>
-          </form>
       </section>
       );
   }

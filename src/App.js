@@ -20,17 +20,12 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom: "",
-      activeMessage: ""
     };
   }
 
   changeActiveRoom(room){
     this.setState({ activeRoom: room })
-    console.log(this.state.activeRoom, 'THIS IS ACTIVEROOM');
-  }
-
-  showMessage(message){
-    this.setState({ activeMessage: message })
+    //console.log(this.state.activeRoom, 'THIS IS ACTIVEROOM');
   }
 
   render() {
@@ -41,8 +36,7 @@ class App extends Component {
         </header>
           <div className="container">
             <div className="room-list">
-              <h3>Select a room</h3>
-                {/*<h3>{this.state.activeRoom || "Select A Room"}</h3>*/}
+                <h3>You are in : {this.state.activeRoom.name || "Select A Room"}</h3>
               <ul>
                 <RoomList
                   firebase={firebase}
@@ -56,7 +50,6 @@ class App extends Component {
                 <MessageList
                   firebase={firebase}
                   activeRoom={ this.state.activeRoom }
-                  showMessage={ (message) => this.showMessage(message) }
                 />
               </ul>
             </div>

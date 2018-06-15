@@ -10,6 +10,21 @@ class RoomList extends Component {
     this.roomsRef = this.props.firebase.database().ref('rooms');
    }
 
+   componentDidMount() {
+     this.roomsRef.on('child_added', snapshot => {
+       const room = snapshot.val();
+       room.key = snapshot.key;
+       //console.log("Actually got name " + room.name)
+       this.setState({ rooms: this.state.rooms.concat(room) });
+     });
+   }
+
+   handleChange(e){
+     this.setState(
+       { newRoomName: e.target.value }
+     );
+   }
+
    createRoom(e) {
      e.preventDefault();
      if(!this.state.newRoomName){
@@ -23,20 +38,6 @@ class RoomList extends Component {
      )
    }
 
-   handleChange(e){
-     this.setState(
-       { newRoomName: e.target.value }
-     );
-   }
-
-   componentDidMount() {
-     this.roomsRef.on('child_added', snapshot => {
-       const room = snapshot.val();
-       room.key = snapshot.key;
-       this.setState({ rooms: this.state.rooms.concat(room) });
-     });
-   }
-
     render(){
       return(
         <section className='room-list'>
@@ -44,7 +45,8 @@ class RoomList extends Component {
           {/*Highlight the active room*/}
           {
             this.state.rooms.map( (room,index) =>
-              <li key={index} onClick={ (room) => this.props.changeActiveRoom(room) }>
+              //onClick doesn't take an argument. If you pass room here, Javascript will set it to undefined.
+              <li key={index} onClick={ () => this.props.changeActiveRoom(room) }>
                 {room.name}
               </li>
             )
