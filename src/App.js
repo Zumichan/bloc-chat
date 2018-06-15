@@ -21,17 +21,12 @@ class App extends Component {
     super(props);
     this.state = {
       activeRoom: "",
-      activeMessage: "",
       user:""
     };
   }
 
   changeActiveRoom(room){
     this.setState({ activeRoom: room })
-  }
-
-  showMessage(message){
-    this.setState({ activeMessage: message })
   }
 
   setUser(user) {
@@ -46,25 +41,24 @@ class App extends Component {
         </header>
           <div className="container">
             <div className="room-list">
-            <h2>{this.state.activeRoom || "Select A Room"}</h2>
-            <ul>
-              <RoomList
-                firebase={firebase}
-                activeRoom={ this.state.activeRoom }
-                changeActiveRoom={ (room) => this.changeActiveRoom(room) }
-              />
-                </ul>
-              </div>
-              <div className="message-list">
+                <h3>You are in : {this.state.activeRoom.name || "Select A Room"}</h3>
+              <ul>
+                <RoomList
+                  firebase={firebase}
+                  activeRoom={ this.state.activeRoom }
+                  changeActiveRoom={ (room) => this.changeActiveRoom(room) }
+                />
+              </ul>
+            </div>
+            <div className="message-list">
               <ul>
               <MessageList
                 firebase={firebase}
                 activeRoom={ this.state.activeRoom }
-                showMessage={ (message) => this.showMessage(message) }
               />
               <User
                 firebase={ firebase }
-                user={this.state.user}
+                user={ this.state.user }
                 setUser={ (user) => this.setUser(user) }
               />
               </ul>
