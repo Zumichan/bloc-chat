@@ -26,7 +26,7 @@ class MessageList extends Component {
      this.messagesRef.push({
        username:this.state.username,
        content:this.state.content,
-       sentAt:this.state.sentAt,
+       sentAt:Date.now(),
        roomId:this.state.roomId
      });
      {/*Clear the value of the text inputs on cretion of a message*/}
@@ -43,7 +43,7 @@ class MessageList extends Component {
      this.setState({
        username: !this.props.user ? "Guest" : this.props.user.displayName,
        content: e.target.value,
-       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+       sentAt: Date.now(),
        //sentAt is currently shown as the number of milliseconds
        roomId: this.props.activeRoom.key
       })
