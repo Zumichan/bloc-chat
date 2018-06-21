@@ -13,15 +13,15 @@ class MessageList extends Component {
    this.messagesRef = this.props.firebase.database().ref('messages');
    }
 
-   componentDidMount() {
+  componentDidMount() {
      this.messagesRef.on('child_added', snapshot => {
        const message = snapshot.val();
        message.key = snapshot.key;
        this.setState({ messages: this.state.messages.concat(message) });
      });
-   }
+  }
 
-   createMessage(e) {
+  createMessage(e) {
      e.preventDefault();
      this.messagesRef.push({
        username:this.state.username,
@@ -50,13 +50,28 @@ class MessageList extends Component {
       //console.log(this.props.user,"user is undefined");
    }
 
+  formatTime(time) {
+    if(isNaN(time)){
+      return time;
+    } else {
+    let minutes = Math.floor(time/60000);
+    let seconds = ((time % 60000) / 1000).toFixed(0);;
+    if (seconds <10){
+      seconds = Math.floor(seconds.toString());
+      return minutes+":0"+seconds;
+    }else{
+      seconds=Math.floor(seconds.toString());
+      return minutes+":"+seconds;
+    }
+  }
+}
     render(){
       return(
         <section className='message-list'>
           {
             this.state.messages.map((message, index)=>{
               if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
-                return <li key={index}>{message.username}:{message.content}  {message.sentAt}</li>
+                return <li key={index}>{message.username}:{message.content}  {this.formatTime(message.sentAt)}</li>
               } else {
                 return null
               }
