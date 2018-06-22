@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class MessageList extends Component {
   constructor (props) {
@@ -26,7 +27,7 @@ class MessageList extends Component {
      this.messagesRef.push({
        username:this.state.username,
        content:this.state.content,
-       sentAt:Date.now(),
+       sentAt:this.state.sentAt,
        roomId:this.state.roomId
      });
      {/*Clear the value of the text inputs on cretion of a message*/}
@@ -43,35 +44,20 @@ class MessageList extends Component {
      this.setState({
        username: !this.props.user ? "Guest" : this.props.user.displayName,
        content: e.target.value,
-       sentAt: Date.now(),
+       sentAt: moment().format('h:mm a'),
        //sentAt is currently shown as the number of milliseconds
        roomId: this.props.activeRoom.key
       })
       //console.log(this.props.user,"user is undefined");
    }
 
-  formatTime(time) {
-    if(isNaN(time)){
-      return time;
-    } else {
-    let minutes = Math.floor(time/60000);
-    let seconds = ((time % 60000) / 1000).toFixed(0);;
-    if (seconds <10){
-      seconds = Math.floor(seconds.toString());
-      return minutes+":0"+seconds;
-    }else{
-      seconds=Math.floor(seconds.toString());
-      return minutes+":"+seconds;
-    }
-  }
-}
     render(){
       return(
         <section className='message-list'>
           {
             this.state.messages.map((message, index)=>{
               if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
-                return <li key={index}>{message.username}:{message.content}  {this.formatTime(message.sentAt)}</li>
+                return <li key={index}>{message.username}: {message.content}   {message.sentAt}</li>
               } else {
                 return null
               }
