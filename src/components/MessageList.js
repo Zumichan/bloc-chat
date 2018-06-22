@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 class MessageList extends Component {
   constructor (props) {
@@ -20,20 +21,25 @@ class MessageList extends Component {
     render(){
       return(
         <section className='message-list'>
-          {/*filter results by the ID of the active room*/}
           {
             this.state.messages.map((message, index)=>{
               if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
-                return <li key={index}>{message.username}:{message.content}  {message.sentAt}</li>
+                return <li key={index}>{message.username}: {message.content}   {message.sentAt}</li>
               } else {
                 return null
               }
-              {/* Debug code
-              return <li key={index}>{message.roomId} (selected {(this.props.activeRoom ? this.props.activeRoom.key : "nothing")})-- {message.username}:{message.content}</li>
-              */}
             })
           }
-      </section>
+
+        <form onSubmit={ (e) => this.createMessage(e) }>
+          <input type="text"
+                 value={ this.state.content }
+                 placeholder="Enter a message"
+                 onChange={ (e) => this.handleChange(e) }
+          />
+          <input type="submit" value="Send"/>
+        </form>
+        </section>
     );
   }
 }
