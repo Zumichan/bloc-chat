@@ -37,6 +37,10 @@ class RoomList extends Component {
      );
    }
 
+   deleteRoom() {
+	   this.roomsRef.child(this.props.activeRoom.key).remove();
+	 }
+
     render(){
       return(
         <section className='room-list'>
@@ -58,6 +62,9 @@ class RoomList extends Component {
            />
            <input type="submit" value="Create New Room"/>
          </form>
+           <button onClick={ () => this.deleteRoom() }>
+             Delete Room
+           </button>
          </section>
       );
     }
