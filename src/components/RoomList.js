@@ -45,10 +45,7 @@ class RoomList extends Component {
           {/*Highlight the active room*/}
           {
             this.state.rooms.map( (room,index) =>
-<<<<<<< HEAD
               //onClick doesn't take an argument. If you pass room here, Javascript will set it to undefined.
-=======
->>>>>>> checkpoint-send-messages
               <li key={index} onClick={ () => this.props.changeActiveRoom(room) }>
                 {room.name}
               </li>
