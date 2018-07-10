@@ -24,10 +24,14 @@ h1 {
   padding: 10px;
 }
 
-.container-right {
+.room-list ul {
+  display: inline;
+  text-align: center;
+}
 
+.container-right {
+  float: right;
   width: 50%;
   padding: 10px;
   background-color: green;
-
 }
