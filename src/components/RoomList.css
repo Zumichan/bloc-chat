@@ -1,3 +1,11 @@
-input[type="text"] {
+.room-name {
     width: 150px;
+}
+
+.roomForm {
+  margin-top: 20px;
+}
+
+.roomName:hover {
+  cursor: pointer;
 }

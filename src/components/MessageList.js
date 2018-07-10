@@ -54,23 +54,26 @@ class MessageList extends Component {
     render(){
       return(
         <section className='message-list'>
+          <div className='messages'>
           {
             this.state.messages.map((message, index)=>{
               if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
-                return <li key={index}>{message.username}:{message.content}  {message.sentAt}</li>
+                return <li className='message' key={index}>{message.username} : {message.content}
+                <span className="display-time">{message.sentAt}</span></li>
               } else {
                 return null
               }
             })
           }
-
-        <form onSubmit={ (e) => this.createMessage(e) }>
-          <input type="text"
+          </div>
+        <form className="message-form" onSubmit={ (e) => this.createMessage(e) }>
+          <input className="new-message"
+                 type="text"
                  value={ this.state.content }
                  placeholder="Enter a message"
                  onChange={ (e) => this.handleChange(e) }
           />
-          <input type="submit" value="Send"/>
+          <input className='submit-message' type="submit" value="Send"/>
         </form>
         </section>
     );
