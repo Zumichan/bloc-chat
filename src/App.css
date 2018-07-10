@@ -1,11 +1,8 @@
 .App {
-  height: 400px;
-  width: 600px;
-  margin: .5em;
-  font-size: 13px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  float: left;
 }
 
 ul {
@@ -13,25 +10,26 @@ ul {
 }
 
 h1 {
-  text-align: left;
+  padding-left: 10px;
+}
+
+h3 {
   padding-left: 10px;
 }
 
 .container-left {
   float:left;
-  width: 50%;
+  width: 35%;
+  height: 100%;
   background-color: gray;
-  padding: 10px;
-}
-
-.room-list ul {
-  display: inline;
-  text-align: center;
+  padding-top: 10px;
 }
 
 .container-right {
   float: right;
-  width: 50%;
-  padding: 10px;
+  width: 65%;
+  height: 100%;
   background-color: green;
+  text-align: left;
+  padding-top: 10px;
 }
