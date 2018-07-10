@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './RoomList.css';
 
 class RoomList extends Component {
   constructor (props) {
@@ -57,7 +58,7 @@ class RoomList extends Component {
          <form onSubmit={ (e) => this.createRoom(e) }>
            <input type="text"
                   value={ this.state.newRoomName }
-                  placeholder="Please enter a room name."
+                  placeholder="Please enter a room name"
                   onChange={ (e) => this.handleChange(e) }
            />
            <input type="submit" value="Create New Room"/>

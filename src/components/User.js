@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './User.css';
 
 class User extends Component {
 
@@ -20,7 +21,6 @@ class User extends Component {
   render(){
     return(
       <div>
-        { this.props.user === null? "Guest" : this.props.user.displayName }
         <button onClick={ () => this.signIn() }>Sign In</button>
         <button onClick={ () => this.signOut() }>Sign Out</button>
       </div>

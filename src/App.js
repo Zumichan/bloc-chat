@@ -40,8 +40,18 @@ class App extends Component {
         <header>
           <h1>Bloc Chat</h1>
         </header>
-          <div className="container">
-            <div className="room-list">
+          <div className="container-left">
+              <div className="user-name">
+                <h3>Welcome {this.state.user === null? "Guest" : this.state.user.displayName}!</h3>
+              <ul>
+                <User
+                  firebase={ firebase }
+                  user={ this.state.user }
+                  setUser={ (user) => this.setUser(user) }
+                />
+              </ul>
+                </div>
+              <div className="room-list">
                 <h3>You are in : {this.state.activeRoom.name || "Select A Room"}</h3>
               <ul>
                 <RoomList
@@ -51,6 +61,8 @@ class App extends Component {
                 />
               </ul>
             </div>
+            </div>
+            <div className="container-right">
             <div className="message-list">
               <ul>
               <MessageList
@@ -59,13 +71,8 @@ class App extends Component {
                 //In order to use user as props in MessageList.js
                 user={ this.state.user }
               />
-              <User
-                firebase={ firebase }
-                user={ this.state.user }
-                setUser={ (user) => this.setUser(user) }
-              />
               </ul>
-              </div>
+            </div>
           </div>
       </div>
     );
