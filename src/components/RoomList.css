@@ -1,5 +1,6 @@
 .room-name {
-    width: 150px;
+  width: 200px;
+  margin-bottom: 2px;
 }
 
 .roomForm {
@@ -8,4 +9,8 @@
 
 .roomName:hover {
   cursor: pointer;
+}
+
+.submit-room {
+  margin-bottom: 10px;
 }

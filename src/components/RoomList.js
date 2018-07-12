@@ -62,7 +62,7 @@ class RoomList extends Component {
                   placeholder="Please enter a room name"
                   onChange={ (e) => this.handleChange(e) }
            />
-           <input type="submit" value="Create New Room"/>
+           <input className="submit-room" type="submit" value="Create New Room"/>
          </form>
            <button type="button" onClick={ () => this.deleteRoom() }>
              Delete Room

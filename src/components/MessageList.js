@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import './MessageList.css';
 
 class MessageList extends Component {
@@ -44,8 +45,7 @@ class MessageList extends Component {
      this.setState({
        username: !this.props.user ? "Guest" : this.props.user.displayName,
        content: e.target.value,
-       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-       //sentAt is currently shown as the number of milliseconds
+       sentAt: moment().format('h:mm a'),
        roomId: this.props.activeRoom.key
       })
       //console.log(this.props.user,"user is undefined");
@@ -53,29 +53,59 @@ class MessageList extends Component {
 
     render(){
       return(
-        <section className='message-list'>
-          <div className='messages'>
+        <div className="container">
+    <div className="row">
+        <div className="col-md-6">
+            <div className="panel panel-primary">
+                <div className="panel-heading">
+                    <span className="glyphicon glyphicon-comment"></span> <strong>You are in {this.props.activeRoom.name}</strong>
+        <section className='panel-body'>
+          <ul className='chat'>
           {
             this.state.messages.map((message, index)=>{
               if (this.props.activeRoom && (message.roomId === this.props.activeRoom.key)) {
-                return <li className='message' key={index}>{message.username} : {message.content}
-                <span className="display-time">{message.sentAt}</span></li>
+                return <li className="left clearfix" key={index}>
+                        <div className="chat-body clearfix">
+                          <div className="header">
+                            <span className="chat-img pull-left">
+                              <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" className="img-circle" />
+                            </span>
+                            <strong className="primary-font">  {message.username} </strong> <small className="pull-right text-muted">
+                              <span className="glyphicon glyphicon-time"></span>{message.sentAt}</small>
+                          </div>
+                          <p>
+                            {message.content}
+                          </p>
+                        </div>
+                       </li>
               } else {
                 return null
               }
             })
           }
-          </div>
+          </ul>
         <form className="message-form" onSubmit={ (e) => this.createMessage(e) }>
-          <input className="new-message"
+        <div className="panel-footer">
+          <div className="input-group">
+          <input id="btn-input"
                  type="text"
+                 className="form-control input-sm"
                  value={ this.state.content }
-                 placeholder="Enter a message"
+                 placeholder="Type your message here..."
                  onChange={ (e) => this.handleChange(e) }
           />
-          <input className='submit-message' type="submit" value="Send"/>
+          <span className="input-group-btn">
+            <input className='btn btn-warning btn-sm' id="btn-chat" type="submit" value="Send"/>
+          </span>
+          </div>
+        </div>
         </form>
         </section>
+        </div>
+          </div>
+      </div>
+  </div>
+</div>
     );
   }
 }

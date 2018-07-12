@@ -1,36 +1,73 @@
-.message:nth-child(odd) {
-  background: antiquewhite;
+.chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: scroll;
 }
 
-.messages {
-  width: 90%;
-  margin-bottom: 40px;
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
 }
 
-.message-form {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 65%;
-  margin-left: 38%;
-  height: 40px;
-  margin-bottom: 20px;
+.chat li.left .chat-body
+{
+    margin-left: 60px;
 }
 
-.new-message {
-  height: 100%;
-  width: 80%;
+.chat li.right .chat-body
+{
+    margin-right: 60px;
 }
 
-.submit-message {
-  width: 10%;
-  background-color: gray;
-  height: 46px;
-  border: none;
-  color: white;
-  font-size: 16px;
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
 }
 
-.display-time {
-  padding-left: 50px;
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    height: 100%;
+    margin-top: 10px;
+}
+
+.panel-heading {
+  width: 180%;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.form-control {
+  padding: 0;
+}
+
+.img-circle {
+  width: 30px;
+  height: 30px;
 }

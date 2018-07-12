@@ -52,7 +52,7 @@ class App extends Component {
                 </ul>
               </div>
               <div className="room-list">
-                <h3>You are in : {this.state.activeRoom.name || "Select A Room"}</h3>
+                <h3>Please select a chat room</h3>
                 <ul>
                   <RoomList
                     firebase={firebase}
